@@ -1,0 +1,35 @@
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+//media query manager
+/*
+    0 - 600px: phone
+    600 - 900px: tablet (portrait mode)
+    900 - 1200px: tablet (landscape mode)
+    [1200 - 1800px: desktop (NORMAL STYLES APPLY)]
+    1800+ : big desktop
+*/
+
+// em is the best unit to be used with media queries => 1em = 16px (default size set by the browser)
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 37.5em) { @content }; //600px
+    }
+    @if $breakpoint == tab-port {
+        @media only screen and (max-width: 56.25em) { @content }; //900px
+    }
+    // @if $breakpoint == tab-port-lg {
+    //     @media (max-width: 68.75em) { @content }; //1100px
+    // }
+    @if $breakpoint == tab-land {
+        @media only screen and (max-width: 75em) { @content }; //1200px
+    }
+    @if $breakpoint == big-desktop {
+        @media only screen and (min-width: 112.5em) { @content }; //1800px
+    }
+}

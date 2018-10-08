@@ -1,0 +1,48 @@
+/* inital setup to clear any default values applied to elements */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; /*set this to ALL elements (pseudo elements after and before too)*/
+}
+
+html {
+  /*defined to an easier to calculate value (10px) root font-size so rem values can reference,
+   however setting font-size to 10px is a bad practive since it prevents user to change font-size
+   in the browser. So we set a percentage of the default font-size set by the browser (16px), making
+   .625 (62.5%) * 16px we have 10px (which is what we want for root font-size).
+  */
+  font-size: 62.5%;
+
+  //in case 2 media queries are true (for example: 700px screen, both tab-land and tab-port are true, since 700 is less then 1200 and also less than 900), the last media query written on code is going to be applied. This is the reason we begin with bigger sizes to smaller (also because this project was built using a desktop-first approach)
+  @include respond(big-desktop) {
+    font-size: 75%;
+  }
+
+  @include respond(tab-land) {
+    font-size: 56.25%;
+  }
+
+  @include respond(tab-port) {
+    font-size: 50%;
+  }
+
+  @include respond(phone) {
+    font-size: 35%;
+  }
+}
+
+body {
+  box-sizing: border-box;
+  padding: 3rem; 
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}

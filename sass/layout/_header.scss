@@ -1,0 +1,42 @@
+/* always test these background properties and values on wider and smaller screens on browser */
+.header {
+  height: 90vh; /* viewport height keeps it responsive always at 95% height of device screen*/
+  background-image: linear-gradient(
+    to right bottom, 
+    rgba($color-primary-light, 0.8),
+    rgba($color-primary-dark, 0.8)), 
+  url(../img/hero.jpg);
+  background-size: cover; /*it automatically adjusts image to screen size, image is correct even on smaller devices*/
+  background-position: top; /*change how image is positioned inside container*/
+  position: relative; /* needs to be set so children elements have posiotining reference */
+  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 80vh, 50% 100%, 0% 80vh, 0 0);
+  clip-path: polygon(50% 0%, 100% 0, 100% 80vh, 50% 100%, 0% 80vh, 0 0);
+
+  @include respond(phone) {
+    -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 80vh, 50% 100%, 0% 80vh, 0 0);
+    clip-path: polygon(50% 0%, 100% 0, 100% 80vh, 50% 100%, 0% 80vh, 0 0);
+  }
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    height: 3.5rem; /* setting only height the browser will scale width proportionally*/
+  }
+
+  /*absolute + top + left chooses the exact pixel where coordinates 0,0 will be for the element,
+  this helps ensure the exact point on parent element (exact half width for example). Then 
+  transform - translate -50%, -50% ensures the middle of the element will be aligned to the 
+  initial coordinates (0,0) defined previously. Mathematical precision
+  */
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
